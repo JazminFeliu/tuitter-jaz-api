@@ -23,7 +23,6 @@ export class TuitsController {
 
     @Post()
     createTuit(@Body() message: CreateTuitDto): void {
-        console.log(message instanceof CreateTuitDto);
         return this.tuitService.createTuit(message);
     }
 
