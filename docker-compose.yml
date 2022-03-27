@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres2
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres    
+    volumes:
+      - /home/jazmin/postgres/data2:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgAdmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@nestjs.com
+      - PGADMIN_DEFAULT_PASSWORD=my-weak-password
+      - PGADMIN_LISTEN_PORT=80
+    ports:
+      - 8080:80
+    volumes:
+       - ./pgdata:/var/lib/pgadmin
+    depends_on:
+      - postgres
