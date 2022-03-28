@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Patch, Post, Delete, Query } from '@nestjs/common';
-import { CreateTuitDto, UpdateTuitDto } from './dto';
+import { CreateTuitDto, PaginationQueryDto, UpdateTuitDto } from './dto';
 import { Tuit } from './tuit.entity';
 import { TuitsService } from './tuits.service';
 
@@ -11,9 +11,8 @@ export class TuitsController {
     }
 
     @Get()
-    getTuits(@Query() filterQuery): Promise <Tuit[]> {
-        const { searchTerm, orderBy } = filterQuery;
-        return this.tuitService.getTuits();
+    getTuits(@Query() pagination: PaginationQueryDto): Promise <Tuit[]> {
+        return this.tuitService.getTuits(pagination);
     }
 
     @Get(':id') //tuits/1
